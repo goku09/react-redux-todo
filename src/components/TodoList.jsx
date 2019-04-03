@@ -3,19 +3,18 @@ import { connect } from "react-redux";
 import Todo from "./Todo";
 
 import { getTodosByVisibilityFilter } from "../redux/selectors";
-import { VISIBILITY_FILTERS } from "../constants";
 
 class TodoList extends Component {
   render() {
     const { todos } = this.props;
     return (
-      <ul className="todo-list">
+      <div className="todo-list-container">
         {todos && todos.length
           ? todos.map((todo, index) => {
               return <Todo key={"todo-" + todo.id} todo={todo} />;
             })
-          : "Todo List Empty"}
-      </ul>
+          : null}
+      </div>
     );
   }
 }
