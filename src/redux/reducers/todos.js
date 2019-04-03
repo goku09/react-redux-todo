@@ -1,4 +1,4 @@
-import { ADD_TODO, TOGGLE_TODO } from "../actionTypes";
+import { DELETE_TODO, ADD_TODO, TOGGLE_TODO } from "../actionTypes";
 
 const initialState = {
   allIds: [],
@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
       };
     }
 
-    case TOGGLE_TODO:
+    case TOGGLE_TODO: {
       const { id } = action.payload;
       return {
         ...state,
@@ -34,6 +34,23 @@ export default (state = initialState, action) => {
           }
         }
       };
+    }
+
+    case DELETE_TODO: {
+      const { id } = action.payload;
+      return {
+        ...state,
+        allIds: [...state.allIds.filter(item => item !== id)],
+        byIds: {
+          ...Object.keys(state.byIds).reduce((object, key) => {
+            if (parseInt(key) !== id) {
+              object[key] = state.byIds[key];
+            }
+            return object;
+          }, {})
+        }
+      };
+    }
 
     default:
       return state;

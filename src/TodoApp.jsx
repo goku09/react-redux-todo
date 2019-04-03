@@ -8,10 +8,12 @@ export default class TodoApp extends Component {
   render() {
     return (
       <div className="todo-app">
-        <h1>Todo List</h1>
-        <AddTodo />
-        <TodoList />
-        <VisibilityFilters />
+        <h1 className="todo-heading">todos</h1>
+        <div className="main-app">
+          <AddTodo />
+          <TodoList />
+          <VisibilityFilters />
+        </div>
       </div>
     );
   }
