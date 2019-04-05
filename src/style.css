@@ -50,17 +50,18 @@ body {
 
 .input-icon {
   display: flex;
-  flex: 1;
+  flex: 0.5;
   padding: 10px 0 10px 15px;
   justify-content: flex-start;
   background-color: #fcfcfc;
+  cursor: pointer;
 }
 
 .input-box {
   display: flex;
   flex: 9;
   margin: 0;
-  padding: 0;
+  padding-left: 30px;
   border: none;
   width: inherit;
   height: inherit;
