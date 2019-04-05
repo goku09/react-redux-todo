@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../redux/actions";
+import { addTodo, toggleTodo } from "../redux/actions";
+import { getTodosByVisibilityFilter } from "../redux/selectors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -21,10 +22,19 @@ class AddTodo extends Component {
     }
   };
 
+  handleToogleAll = () => {
+    const { todos, toggleTodo } = this.props;
+    todos.forEach(element => {
+      if (!element.completed) {
+        toggleTodo(element.id);
+      }
+    });
+  };
+
   render() {
     return (
       <div className="add-todo">
-        <div className="input-icon">
+        <div className="input-icon" onClick={this.handleToogleAll}>
           <FontAwesomeIcon
             icon={faAngleDown}
             size="2x"
@@ -44,7 +54,13 @@ class AddTodo extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    todos: getTodosByVisibilityFilter(state, state.visibilityFilter)
+  };
+};
+
 export default connect(
-  null,
-  { addTodo }
+  mapStateToProps,
+  { addTodo, toggleTodo }
 )(AddTodo);
